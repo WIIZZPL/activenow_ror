@@ -1,0 +1,31 @@
+<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+
+<dir>
+
+    <%= link_to "Back to dashboard", admin_root_path%>
+
+    <h1>User directory</h1>
+
+    <%= link_to "Create user", new_user_path%>
+
+    <table id="users">
+        <thead>
+            <tr>
+            <th>Email</th>
+            <th>Type</th>
+            <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @users.each do |user| %>
+            <th><%= user.email_address %></th>
+            <th><%= user.user_type.name %></th>
+
+            <th style="text-align: center"><%= button_to "Destroy", user, method: :delete, data: { confirm: "Are you sure you want to delete this user?" } %></th>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+
+</dir>

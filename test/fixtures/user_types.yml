@@ -2,12 +2,6 @@
 
 one:
   name: MyString
-  desc: MyString
-  due: 2026-01-09
-  done: false
 
 two:
   name: MyString
-  desc: MyString
-  due: 2026-01-09
-  done: false
