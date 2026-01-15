@@ -4,8 +4,8 @@ Niniejszy projekt jest przykładowym system zarządzania szkołą.
 
 ## Uruchomienie
 
-    Serwer można łatwo uruchomić i przygotować poprzez wkoananie polecenia
-    `bin/setup`
+Serwer można łatwo uruchomić i przygotować poprzez wkoananie polecenia
+`bin/setup`
 
 ## Możliwości systemu
 
@@ -35,11 +35,11 @@ Student ma jedynie wgląd do danych.
 
 Przykładowe dane logowania:
     Student:
-        Email: adrian1@school.com
+        Email: `adrian1@school.com`
     Nauczyciel:
-        Email: sandra6@school.com
+        Email: `sandra6@school.com`
     Administrator:
-        Email: marcin8@school.com
+        Email: `marcin8@school.com`
     
     Wszystkie hasła to 1234
 
