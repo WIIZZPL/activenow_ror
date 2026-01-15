@@ -1,24 +1,57 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Niniejszy projekt jest przykładowym system zarządzania szkołą.
 
-Things you may want to cover:
+## Możliwości systemu
 
-* Ruby version
+    - Zarządzanie użytkowników
+    - Logowanie i autoryzacja użytkowników
+    - Zarządzenie różnymi klasami, przedmiotami, i zajęciami
+    - Tworzenie egzaminów i informowanie o nadchodących egzaminach
+    - Obliczanie średniej z przedmiotów
 
-* System dependencies
+## Użytkownicy
 
-* Configuration
+System obsługuje trzy typy użytkowników:
+    - studentów
+    - nauczycieli
+    - administratorów
 
-* Database creation
+Użytkownicy mają własne widoki oraz odrębne pozwolenia odnośnie systemu.
 
-* Database initialization
+Administrator posiada pełne zezwolenia.
+    Może on między innymi tworzyć i usuwać użytkownicy, przedmioty, i klasy (roki).
 
-* How to run the test suite
+Nauczyciel posiada zezwolenia zawęrzone do swoich klas i uczniów.
+    Może on ogłaszać egzaminy oraz dawać uczniom oceny.
 
-* Services (job queues, cache servers, search engines, etc.)
+Student ma jedynie wgląd do danych.
+    Może on zobaczyć jakie są przyszłe egzaminy, jaką ma średnią, oraz na jakie przedmioty jest zapisany.
 
-* Deployment instructions
+Przykładowe dane logowania:
+    Student:
+        Email: adrian1@school.com
+    Nauczyciel:
+        Email: sandra6@school.com
+    Administrator:
+        Email: marcin8@school.com
+    
+    Wszystkie hasła to 1234
 
-* ...
+    Dane logowania innych użytkowników można znaleźć w pliku seeds.rb
+
+## Tabele
+
+    Users - Użytkownicy
+    User_types - Typy użytkowników
+    Grades - Klasy (grupy użytkowniów)
+    Subjects - Lista przedmioty
+    Courses - Zajęcia (Klasa + przedmiot + nauczyciel)
+    Marks - Oceny
+    Exams - Egzaminy
+
+## Ładowanie bazy danych
+
+Dane testowe znajdują się w seeds.rb
+Żeby je należy wykonać polecenie
+`rails db:seed`

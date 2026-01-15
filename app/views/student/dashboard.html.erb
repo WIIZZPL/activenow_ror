@@ -1,11 +1,107 @@
 <dir>
     <h1>Student dashboard!</h1>
 
-    <p>Welcome <%= Current.user.email_address%>!</p>
-
     <%= button_to "Logout", session_path, method: :delete%>
 
-    <ul>
-        
-    </ul>
+    <p>Welcome <%= Current.user.email_address%>!</p>
+
+    <p>Grade <%= Current.user.grade.name%></p>
+    <p>Year <%= Current.user.grade.year%></p>
+
+    <h2>GPA: <%= Current.user.gpa%></h2>
+
+    <h2>Upcoming Exams</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Title</th>
+                    <th>Course</th>
+                    <th>Teacher</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @exams.each do |exam|%>
+                <tr>
+                    <th><%= exam.date %></th>
+                    <th><%= exam.title %></th>
+                    <th><%= exam.course.subject.name %></th>
+                    <th><%= exam.course.teacher.email_address %></th>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+    
+    <h2>Courses</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Average grade</th>
+                    <th>Teacher</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @courses.each do |course|%>
+                <tr>
+                    <th><%= course.subject.name %></th>
+                    <th><%= @marks.where(course: course).average(:value).round(2) %>
+                    <th><%= course.teacher.email_address %></th>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+
+    <h2>Marks list</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Value</th>
+                    <th>Course</th>
+                    <th>Description</th>
+                    <th>Teacher</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @marks.each do |mark|%>
+                <tr>
+                    <th><%= mark.created_at.to_date %></th>
+                    <th><%= mark.value %></th>
+                    <th><%= mark.course.subject.name %></th>
+                    <th><%= mark.full_description %></th>
+                    <th><%= mark.course.teacher.email_address %></th>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+
+    <h2>Past exams</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Title</th>
+                    <th>Course</th>
+                    <th>Grade</th>
+                    <th>Teacher</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @past_exams.each do |exam|%>
+                <tr>
+                    <th><%= exam.date %></th>
+                    <th><%= exam.title %></th>
+                    <th><%= exam.course.subject.name %></th>
+                    <th><%= @marks.find_by(exam: exam)&.value %>
+                    <th><%= exam.course.teacher.email_address %></th>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+
 </dir>

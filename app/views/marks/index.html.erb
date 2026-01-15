@@ -1,0 +1,70 @@
+<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+
+<% content_for :title, "Marks" %>
+
+<dir>
+
+    <%= link_to "Back to dashboard", root_path%>
+
+    <h1>Marks directory</h1>
+
+    <%= link_to "Create mark", new_mark_path%>
+
+    <%= form_with url: marks_path, method: :get, local: true do %>
+        <div>
+            <%= label_tag :user_id, "Student" %>
+            <%= select_tag :user_id,
+                options_from_collection_for_select(@students, :id, :email_address, params[:user_id]),
+                include_blank: "Any"
+            %>
+        </div>
+
+        <div>
+            <%= label_tag :grade_id, "Grade" %>
+            <%= select_tag :grade_id,
+                options_from_collection_for_select(@grades, :id, :name, params[:grade_id]),
+                include_blank: "Any"
+            %>
+        </div>
+
+        <div>
+            <%= label_tag :subject_id, "Subject" %>
+            <%= select_tag :subject_id,
+                options_from_collection_for_select(@subjects, :id, :name, params[:subject_id]),
+                include_blank: "Any"
+            %>
+        </div>
+
+        <%= submit_tag "Filter" %>
+    <% end %>
+
+    <table id="grades">
+        <thead>
+            <tr>
+            <th>Date</th>
+            <th>Student</th>
+            <th>Grade</th>
+            <th>Value</th>
+            <th>Subject</th>
+            <th>Desc</th>
+            <th></th>
+            <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @marks.each do |mark| %>
+            <th><%= mark.created_at.to_date %></th>
+            <th><%= mark.student.email_address %></th>
+            <th><%= mark.course.grade.name %></th>
+            <th><%= mark.value %></th>
+            <th><%= mark.course.subject.name %></th>
+            <th><%= mark.desc %></th>
+            <th style="text-align: center"><%= link_to "Edit", edit_mark_path(mark) %></th>
+            <th style="text-align: center"><%= button_to "Destroy", mark, method: :delete, data: { confirm: "Are you sure you want to delete this grade?" } %></th>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+
+</dir>

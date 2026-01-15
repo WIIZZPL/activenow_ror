@@ -1,0 +1,83 @@
+<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+
+<% content_for :title, "Exams" %>
+
+<dir>
+
+    <%= link_to "Back to dashboard", root_path%>
+
+    <h1>Exams directory</h1>
+
+    <%= link_to "Create exam", new_exam_path%>
+
+    <%= form_with url: exams_path, method: :get, local: true do %>
+        <div>
+            <%= label_tag :grade_id, "Grade" %>
+            <%= select_tag :grade_id,
+                options_from_collection_for_select(@grades, :id, :name, params[:grade_id]),
+                include_blank: "Any"
+            %>
+        </div>
+
+        <div>
+            <%= label_tag :subject_id, "Subject" %>
+            <%= select_tag :subject_id,
+                options_from_collection_for_select(@subjects, :id, :name, params[:subject_id]),
+                include_blank: "Any"
+            %>
+        </div>
+        <%= submit_tag "Filter" %>
+    <% end %>
+
+    <h2>Upcoming exams</h2>
+
+    <table id="exams">
+        <thead>
+            <tr>
+            <th>Date</th>
+            <th>Title</th>
+            <th>Grade</th>
+            <th>Subject</th>
+            <th></th>
+            <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @exams.each do |exam| %>
+            <th><%= exam.date %></th>
+            <th><%= exam.title %></th>
+            <th><%= exam.course.grade.name %></th>
+            <th><%= exam.course.subject.name %></th>
+            <th style="text-align: center"><%= link_to "Edit", edit_exam_path(exam) %></th>
+            <th style="text-align: center"><%= button_to "Destroy", exam, method: :delete, data: { confirm: "Are you sure you want to delete this exam?" } %></th>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+
+    <h2>Past exams</h2>
+
+    <table id="past_exams">
+        <thead>
+            <tr>
+            <th>Date</th>
+            <th>Title</th>
+            <th>Grade</th>
+            <th>Subject</th>
+            <th>Attendance</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @past_exams.each do |exam| %>
+            <th><%= exam.date %></th>
+            <th><%= exam.title %></th>
+            <th><%= exam.course.grade.name %></th>
+            <th><%= exam.course.subject.name %></th>
+            <th><%= exam.marks.count %></th>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+
+</dir>

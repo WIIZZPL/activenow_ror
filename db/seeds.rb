@@ -55,7 +55,74 @@ courses = [
   [grade: Grade.find_by(name: "1B"), subject: Subject.find_by(name: "Polish"),       teacher: User.find_by(email_address: "tomasz7@school.com")],
   
   [grade: Grade.find_by(name: "2C"), subject: Subject.find_by(name: "Math"),         teacher: User.find_by(email_address: "sandra6@school.com")],
-  [grade: Grade.find_by(name: "2C"), subject: Subject.find_by(name: "Programming"),  teacher: User.find_by(email_address: "tomasz7@school.com")],
+  [grade: Grade.find_by(name: "2C"), subject: Subject.find_by(name: "Programming"),  teacher: User.find_by(email_address: "tomasz7@school.com")]
 ]
 
 courses.each { |c| Course.create!(c) }
+
+puts "Seeding exams... "
+exams = [
+  [title: "Arithmetic",         date: DateTime.new(2025, 11, 20), course: Course.find_by(subject: Subject.find_by(name: "Math"),        grade: Grade.find_by(name: "1A"))],
+  [title: "Linear algebra",     date: DateTime.new(2026, 1, 10),  course: Course.find_by(subject: Subject.find_by(name: "Math"),        grade: Grade.find_by(name: "1A"))],
+
+  [title: "Calculus",           date: DateTime.new(2026, 2, 10),  course: Course.find_by(subject: Subject.find_by(name: "Math"),        grade: Grade.find_by(name: "1A"))],
+
+  [title: "Polish romanticism", date: DateTime.new(2025, 12, 5),  course: Course.find_by(subject: Subject.find_by(name: "Polish"),      grade: Grade.find_by(name: "1A"))],
+
+  [title: "Pan Tadeusz",        date: DateTime.new(2026, 2, 8),   course: Course.find_by(subject: Subject.find_by(name: "Polish"),      grade: Grade.find_by(name: "1A"))],
+
+  [title: "Arithmetic",         date: DateTime.new(2025, 11, 22), course: Course.find_by(subject: Subject.find_by(name: "Math"),        grade: Grade.find_by(name: "1B"))],
+  [title: "Linear algebra",     date: DateTime.new(2026, 1, 12),  course: Course.find_by(subject: Subject.find_by(name: "Math"),        grade: Grade.find_by(name: "1B"))],
+  
+  [title: "Calculus",           date: DateTime.new(2026, 2, 12),  course: Course.find_by(subject: Subject.find_by(name: "Math"),        grade: Grade.find_by(name: "1B"))],
+
+  [title: "Polish romanticism", date: DateTime.new(2025, 12, 8),  course: Course.find_by(subject: Subject.find_by(name: "Polish"),      grade: Grade.find_by(name: "1B"))],
+
+  [title: "Pan Tadeusz",        date: DateTime.new(2026, 2, 10),  course: Course.find_by(subject: Subject.find_by(name: "Polish"),      grade: Grade.find_by(name: "1B"))],
+
+  [title: "Calculus",           date: DateTime.new(2025, 11, 20), course: Course.find_by(subject: Subject.find_by(name: "Math"),        grade: Grade.find_by(name: "2C"))],
+  [title: "Statistics",         date: DateTime.new(2025, 11, 22), course: Course.find_by(subject: Subject.find_by(name: "Math"),        grade: Grade.find_by(name: "2C"))],
+  [title: "Probability",        date: DateTime.new(2026, 1, 10),  course: Course.find_by(subject: Subject.find_by(name: "Math"),        grade: Grade.find_by(name: "2C"))],
+
+  [title: "Calculus II",        date: DateTime.new(2026, 2, 10),  course: Course.find_by(subject: Subject.find_by(name: "Math"),        grade: Grade.find_by(name: "2C"))],
+
+  [title: "Algorithms",         date: DateTime.new(2026, 1, 14),  course: Course.find_by(subject: Subject.find_by(name: "Programming"), grade: Grade.find_by(name: "2C"))],
+  [title: "C Programming",      date: DateTime.new(2026, 1, 10),  course: Course.find_by(subject: Subject.find_by(name: "Programming"), grade: Grade.find_by(name: "2C"))],
+  [title: "Databases",          date: DateTime.new(2026, 1, 12),  course: Course.find_by(subject: Subject.find_by(name: "Programming"), grade: Grade.find_by(name: "2C"))],
+  [title: "Ruby on rails",      date: DateTime.new(2026, 1, 11),  course: Course.find_by(subject: Subject.find_by(name: "Programming"), grade: Grade.find_by(name: "2C"))],
+
+  [title: "Java Programming",   date: DateTime.new(2026, 2, 12),  course: Course.find_by(subject: Subject.find_by(name: "Programming"), grade: Grade.find_by(name: "2C"))],
+  [title: "Data structures",    date: DateTime.new(2026, 2, 10),  course: Course.find_by(subject: Subject.find_by(name: "Programming"), grade: Grade.find_by(name: "2C"))],
+  [title: "Networking",         date: DateTime.new(2026, 2, 18),  course: Course.find_by(subject: Subject.find_by(name: "Programming"), grade: Grade.find_by(name: "2C"))]
+]
+
+exams.each { |e| Exam.create!(e) }
+
+puts "Seeding marks... "
+marks = [
+  [student: User.find_by(email_address: "adrian1@school.com"), value: 4, desc: "", course: Exam.find_by(id: 1).course,  exam: Exam.find_by(id: 1)],
+  [student: User.find_by(email_address: "adrian1@school.com"), value: 4, desc: "", course: Exam.find_by(id: 2).course,  exam: Exam.find_by(id: 2)],
+  [student: User.find_by(email_address: "adrian1@school.com"), value: 2, desc: "", course: Exam.find_by(id: 4).course,  exam: Exam.find_by(id: 4)],
+
+  [student: User.find_by(email_address: "bartek2@school.com"), value: 4, desc: "", course: Exam.find_by(id: 1).course,  exam: Exam.find_by(id: 1)],
+  [student: User.find_by(email_address: "bartek2@school.com"), value: 4, desc: "", course: Exam.find_by(id: 2).course,  exam: Exam.find_by(id: 2)],
+  [student: User.find_by(email_address: "bartek2@school.com"), value: 5, desc: "", course: Exam.find_by(id: 4).course,  exam: Exam.find_by(id: 4)],
+
+  [student: User.find_by(email_address: "celina3@school.com"), value: 3, desc: "", course: Exam.find_by(id: 6).course,  exam: Exam.find_by(id: 6)],
+  [student: User.find_by(email_address: "celina3@school.com"), value: 5, desc: "", course: Exam.find_by(id: 7).course,  exam: Exam.find_by(id: 7)],
+  [student: User.find_by(email_address: "celina3@school.com"), value: 3, desc: "", course: Exam.find_by(id: 9).course,  exam: Exam.find_by(id: 9)],
+
+  [student: User.find_by(email_address: "daniel4@school.com"), value: 2, desc: "", course: Exam.find_by(id: 6).course,  exam: Exam.find_by(id: 6)],
+  [student: User.find_by(email_address: "daniel4@school.com"), value: 2, desc: "", course: Exam.find_by(id: 7).course,  exam: Exam.find_by(id: 7)],
+  [student: User.find_by(email_address: "daniel4@school.com"), value: 4, desc: "", course: Exam.find_by(id: 9).course,  exam: Exam.find_by(id: 9)],
+
+  [student: User.find_by(email_address: "emilia5@school.com"), value: 3, desc: "", course: Exam.find_by(id: 11).course, exam: Exam.find_by(id: 11)],
+  [student: User.find_by(email_address: "emilia5@school.com"), value: 4, desc: "", course: Exam.find_by(id: 12).course, exam: Exam.find_by(id: 12)],
+  [student: User.find_by(email_address: "emilia5@school.com"), value: 4, desc: "", course: Exam.find_by(id: 13).course, exam: Exam.find_by(id: 13)],
+  [student: User.find_by(email_address: "emilia5@school.com"), value: 5, desc: "", course: Exam.find_by(id: 15).course, exam: Exam.find_by(id: 15)],
+  [student: User.find_by(email_address: "emilia5@school.com"), value: 5, desc: "", course: Exam.find_by(id: 16).course, exam: Exam.find_by(id: 16)],
+  [student: User.find_by(email_address: "emilia5@school.com"), value: 4, desc: "", course: Exam.find_by(id: 17).course, exam: Exam.find_by(id: 17)],
+  [student: User.find_by(email_address: "emilia5@school.com"), value: 3, desc: "", course: Exam.find_by(id: 18).course, exam: Exam.find_by(id: 18)]
+]
+
+marks.each { |m| Mark.create!(m) }

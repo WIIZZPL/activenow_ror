@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :marks
+  resources :exams
   resources :courses
   resources :subjects
   resources :grades

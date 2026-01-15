@@ -1,0 +1,42 @@
+<%= form_with(model: mark) do |form| %>
+  <% if mark.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(mark.errors.count, "error") %> prohibited this mark from being saved:</h2>
+
+      <ul>
+        <% mark.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :value, style: "display: block" %>
+    <%= form.number_field :value %>
+  </div>
+
+  <div>
+    <%= form.label :desc, style: "display: block" %>
+    <%= form.text_field :desc %>
+  </div>
+
+  <div>
+    <%= form.label :course_id, style: "display: block" %>
+    <%= form.text_field :course_id %>
+  </div>
+
+  <div>
+    <%= form.label :exam_id, style: "display: block" %>
+    <%= form.text_field :exam_id %>
+  </div>
+
+  <div>
+    <%= form.label :student_id, style: "display: block" %>
+    <%= form.text_field :student_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

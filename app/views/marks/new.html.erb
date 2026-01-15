@@ -1,0 +1,32 @@
+<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+
+<% content_for :title, "New mark" %>
+
+<div>
+  <div>
+    <%= link_to "Back to marks", marks_path %>
+  </div>
+
+  <h1>New mark</h1>
+
+  <%= form_with model: @mark do |form| %>
+    <% if @mark.errors.any? %>
+    <div id="error_explanation" style="color: red;">
+      <h2><%= pluralize(@mark.errors.count, "error") %> prevented this mark from being saved:</h2>
+      <ul>
+        <% @mark.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <div class='field'><%= form.collection_select :student_id, @students, :id, :email_address, prompt: "Select student"%></div>
+    <div class='field'><%= form.collection_select :course_id, @courses, :id, :display_name, prompt: "Select course"%></div>
+    <div class='field'><%= form.number_field :value, min: 2, max: 5 %></div>
+    <div class='field'><%= form.collection_select :exam_id, @exams, :id, :display_name, include_blank: "No exam"%></div>
+    <div class='field'><%= form.text_field :desc, placeholder: "Description" %></div>
+    <div class='actions'><%= form.submit "Add mark" %></div>
+  <% end %>
+</div>

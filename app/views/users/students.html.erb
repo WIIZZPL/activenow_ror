@@ -35,8 +35,8 @@
         <% @students.each do |student| %>
             <th><%= student.grade&.name %></th>
             <th><%= student.email_address %></th>
-            <th><%= "#TODO" %></th>
-            <th><%= link_to "Change grade", edit_user_path(student)%></th>
+            <th><%= student.gpa %></th>
+            <th><%= link_to "Change grade", edit_user_path(student) unless !Current.user&.admin?%></th>
             </tr>
         <% end %>
         </tbody>

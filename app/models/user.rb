@@ -6,6 +6,8 @@ class User < ApplicationRecord
   belongs_to :grade, optional: true
   has_many :courses, foreign_key: "teacher_id", dependent: :restrict_with_exception
 
+  has_many :marks, foreign_key: "student_id", dependent: :destroy
+
   validate :role_validation
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
@@ -20,6 +22,10 @@ class User < ApplicationRecord
 
   def student?
     user_type.name == 'student'
+  end
+
+  def gpa
+    marks.average(:value).round(2) if student?
   end
 
   scope :by_grade, ->(grade_id) {
@@ -37,8 +43,10 @@ class User < ApplicationRecord
     when 'admin'
       errors.add(:grade, "Admins can't be in a grade") if grade.present?
       errors.add(:courses, "Admin can't be teaching a course") if courses.any?
+      errors.add(:courses, "Admin can't be assgined a mark") if marks.any?
     when 'teacher'
       errors.add(:grade, "Teachers can't be in a grade") if grade.present?
+      errors.add(:courses, "Teachers can't be assgined a mark") if marks.any?
     when 'student'
       errors.add(:courses, "Students can't be teaching a course") if courses.any?
     else
