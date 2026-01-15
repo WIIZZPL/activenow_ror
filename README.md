@@ -2,6 +2,10 @@
 
 Niniejszy projekt jest przykładowym system zarządzania szkołą.
 
+## Uruchomienie
+
+    
+
 ## Możliwości systemu
 
     - Zarządzanie użytkowników
