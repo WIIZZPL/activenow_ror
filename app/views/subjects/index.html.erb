@@ -1,0 +1,35 @@
+<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+
+<% content_for :title, "Subjects" %>
+
+<dir>
+
+    <%= link_to "Back to dashboard", root_path%>
+
+    <h1>Subject directory</h1>
+
+    <%= admin_only do%>
+      <%= link_to "Create course", new_subject_path%>
+    <%end%>
+
+    <table id="subjects">
+        <thead>
+            <tr>
+            <th>Subject</th>
+            <th>Course count</th>
+            <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @subjects.each do |subject| %>
+            <th><%= subject.name %></th>
+            <th><%= subject.courses.count %></th>
+
+            <th style="text-align: center"><%= button_to "Destroy", subject, method: :delete, data: { confirm: "Are you sure you want to delete this subject?" }, disabled: !Current.user&.admin? %></th>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+
+</dir>

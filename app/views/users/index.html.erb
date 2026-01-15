@@ -1,6 +1,8 @@
 <%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
 <%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
 
+<% content_for :title, "Users" %>
+
 <dir>
 
     <%= link_to "Back to dashboard", admin_root_path%>
@@ -8,6 +10,26 @@
     <h1>User directory</h1>
 
     <%= link_to "Create user", new_user_path%>
+
+    <%= form_with url: users_path, method: :get, local: true do %>
+        <div>
+            <%= label_tag :user_type_id, "Type" %>
+            <%= select_tag :user_type_id,
+                options_from_collection_for_select(UserType.all, :id, :name, params[:user_type_id]),
+                include_blank: "Any"
+            %>
+        </div>
+
+        <div>
+            <%= label_tag :grade_id, "Grade" %>
+            <%= select_tag :grade_id,
+                options_from_collection_for_select(Grade.all, :id, :name, params[:grade_id]),
+                include_blank: "Any"
+            %>
+        </div>
+
+        <%= submit_tag "Filter" %>
+    <% end %>
 
     <table id="users">
         <thead>

@@ -1,0 +1,45 @@
+<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+
+<% content_for :title, "Students" %>
+
+<dir>
+
+    <%= link_to "Back to dashboard", admin_root_path%>
+
+    <h1>Student directory</h1>
+
+    <%= form_with url: students_users_path, method: :get, local: true do %>
+
+        <div>
+            <%= label_tag :grade_id, "Grade" %>
+            <%= select_tag :grade_id,
+                options_from_collection_for_select(Grade.all, :id, :name, params[:grade_id]),
+                include_blank: "Any"
+            %>
+        </div>
+
+        <%= submit_tag "Filter" %>
+    <% end %>
+
+    <table id="students">
+        <thead>
+            <tr>
+            <th>Grade</th>
+            <th>Email</th>
+            <th>GPA</th>
+            <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @students.each do |student| %>
+            <th><%= student.grade&.name %></th>
+            <th><%= student.email_address %></th>
+            <th><%= "#TODO" %></th>
+            <th><%= link_to "Change grade", edit_user_path(student)%></th>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+
+</dir>

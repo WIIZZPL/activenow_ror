@@ -11,4 +11,22 @@ class ApplicationController < ActionController::Base
       redirect_to root_path, alert: "You are not authorized to view this page."
     end
   end
+
+  def require_teacher
+    unless Current.user&.teacher?
+      redirect_to root_path, alert: "You are not authorized to view this page."
+    end
+  end
+
+  def require_student
+    unless Current.user&.student?
+      redirect_to root_path, alert: "You are not authorized to view this page."
+    end
+  end
+
+  def require_teacher_admin
+    unless Current.user&.teacher? || Current.user&.admin?
+      redirect_to root_path, alert: "You are not authorized to view this page."
+    end
+  end
 end

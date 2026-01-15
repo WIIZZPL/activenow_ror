@@ -1,0 +1,13 @@
+<dir>
+    <h1>Teacher dashboard!</h1>
+
+    <p>Welcome <%= Current.user.email_address%>!</p>
+
+    <%= button_to "Logout", session_path, method: :delete%>
+
+    <ul>
+        <li><%= link_to "List grades", grades_path%></li>
+        <li><%= link_to "List courses", courses_path%></li>
+        <li><%= link_to "List subjects", subjects_path%></li>
+    </ul>
+</dir>

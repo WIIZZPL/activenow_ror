@@ -1,0 +1,40 @@
+<% content_for :title, "Editing user" %>
+
+<dir>
+  <h1>Editing student's grade</h1>
+
+  <br>
+
+  <div>
+    <strong>Email:</strong>
+    <%= @user.email_address %>
+  </div>
+
+  <%= form_with(model: @user) do |form| %>
+  <% if @user.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this subject from being saved:</h2>
+
+      <ul>
+        <% @user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :grade_id, style: "display: block" %>
+    <%= form.collection_select :grade_id, Grade.all, :id, :name, prompt: "Select user type"%><br>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+  <div>
+    <%= link_to "Back to students", students_users_path %>
+  </div>
+</dir>

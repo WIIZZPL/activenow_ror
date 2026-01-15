@@ -1,0 +1,39 @@
+<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+
+<% content_for :title, "Grades" %>
+
+<dir>
+
+    <%= link_to "Back to dashboard", root_path%>
+
+    <h1>Grades directory</h1>
+
+    <%= admin_only do%>
+      <%= link_to "Create grade", new_grade_path%>
+    <%end%>
+
+    <table id="grades">
+        <thead>
+            <tr>
+            <th>Name</th>
+            <th>Year</th>
+            <th>Student count</th>
+            <th>Courses count</th>
+            <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @grades.each do |grade| %>
+            <th><%= grade.name %></th>
+            <th><%= grade.year %></th>
+            <th><%= grade.users.count %></th>
+            <th><%= grade.courses.count %></th>
+
+            <th style="text-align: center"><%= button_to "Destroy", grade, method: :delete, data: { confirm: "Are you sure you want to delete this grade?" }, disabled: !Current.user&.admin? %></th>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+
+</dir>

@@ -1,0 +1,58 @@
+<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+
+<% content_for :title, "Courses" %>
+
+<dir>
+
+    <%= link_to "Back to dashboard", root_path%>
+
+    <h1>Course directory</h1>
+
+    <%= form_with url: courses_path, method: :get, local: true do %>
+        <div>
+            <%= label_tag :subject_id, "Subject" %>
+            <%= select_tag :subject_id,
+                options_from_collection_for_select(Subject.all, :id, :name, params[:subject_id]),
+                include_blank: "Any"
+            %>
+        </div>
+
+        <div>
+            <%= label_tag :grade_id, "Grade" %>
+            <%= select_tag :grade_id,
+                options_from_collection_for_select(Grade.all, :id, :name, params[:grade_id]),
+                include_blank: "Any"
+            %>
+        </div>
+
+        <%= submit_tag "Filter" %>
+    <% end %>
+
+    <%= admin_only do%>
+      <%= link_to "Create course", new_course_path%>
+    <%end%>
+
+    <table id="courses">
+        <thead>
+            <tr>
+            <th>Subject</th>
+            <th>Grade</th>
+            <th>Teacher</th>
+            <th></th>
+            <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @courses.each do |course| %>
+            <th><%= course.subject.name %></th>
+            <th><%= course.grade.name %></th>
+            <th><%= course.teacher.email_address %></th>
+            <th><%= link_to "Edit", edit_course_path(course) %></th>
+            <th style="text-align: center"><%= button_to "Destroy", course, method: :delete, data: { confirm: "Are you sure you want to delete this course?" }, disabled: !Current.user&.admin? %></th>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+
+</dir>

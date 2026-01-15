@@ -1,0 +1,14 @@
+<% content_for :title, "New course" %>
+
+<%= link_to "Back to courses", courses_path%>
+
+<h1>New course</h1>
+
+<%= form_with model: @course do |form| %>
+  <%= form.collection_select :subject_id, Subject.all, :id, :name, prompt: "Select user type"%><br>
+  <%= form.collection_select :grade_id, Grade.all, :id, :name, prompt: "Select user type"%><br>
+  <%= form.collection_select :teacher_id, User.joins(:user_type).where(user_types: { name: "teacher" }), :id, :email_address, prompt: "Select user type"%><br>
+  <%= form.submit "Create course" %>
+<% end %>
+
+<br>

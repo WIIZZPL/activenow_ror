@@ -7,5 +7,7 @@ class PagesController < ApplicationController
 
   def dashboard
     redirect_to admin_root_path if Current.user&.admin?
+    redirect_to teacher_root_path if Current.user&.teacher?
+    redirect_to student_root_path if Current.user&.student?
   end
 end

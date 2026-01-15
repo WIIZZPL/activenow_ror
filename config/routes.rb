@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
+  resources :courses
+  resources :subjects
+  resources :grades
   resource :session
-  resources :users
+  resources :users do
+    collection do
+      get :students
+    end
+  end
   resources :passwords, param: :token
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -21,7 +28,12 @@ Rails.application.routes.draw do
     resources :users
   end
 
-  resources :tasks do
-    patch :toggle_done, on: :member
+  namespace :teacher do
+    root "dashboard"
   end
+
+  namespace :student do
+    root "dashboard"
+  end
+
 end

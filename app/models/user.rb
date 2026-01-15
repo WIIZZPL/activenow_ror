@@ -3,17 +3,46 @@ class User < ApplicationRecord
   has_many :sessions, dependent: :destroy
   belongs_to :user_type
 
+  belongs_to :grade, optional: true
+  has_many :courses, foreign_key: "teacher_id", dependent: :restrict_with_exception
+
+  validate :role_validation
+
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
   def admin?
-    user_type.name = 'admin'
+    user_type.name == 'admin'
   end
 
   def teacher?
-    user_type.name = 'teacher'
+    user_type.name == 'teacher'
   end
 
   def student?
-    user_type.name = 'student'
+    user_type.name == 'student'
+  end
+
+  scope :by_grade, ->(grade_id) {
+    where(grade_id: grade_id) if grade_id.present?
+  }
+
+  scope :by_type, ->(user_type_id) {
+    where(user_type_id: user_type_id) if user_type_id.present?
+  }
+
+  private
+
+  def role_validation
+    case user_type.name
+    when 'admin'
+      errors.add(:grade, "Admins can't be in a grade") if grade.present?
+      errors.add(:courses, "Admin can't be teaching a course") if courses.any?
+    when 'teacher'
+      errors.add(:grade, "Teachers can't be in a grade") if grade.present?
+    when 'student'
+      errors.add(:courses, "Students can't be teaching a course") if courses.any?
+    else
+      errors.add(:user_type, "User type is invalid")
+    end
   end
 end
