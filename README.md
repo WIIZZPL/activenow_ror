@@ -4,23 +4,23 @@ Niniejszy projekt jest przykładowym system zarządzania szkołą.
 
 ## Uruchomienie
 
-Serwer można łatwo uruchomić i przygotować poprzez wkoananie polecenia
+Serwer można łatwo uruchomić i przygotować poprzez wykonanie polecenia
 `bin/setup`
 
 ## Możliwości systemu
 
-    - Zarządzanie użytkowników
-    - Logowanie i autoryzacja użytkowników
-    - Zarządzenie różnymi klasami, przedmiotami, i zajęciami
-    - Tworzenie egzaminów i informowanie o nadchodących egzaminach
-    - Obliczanie średniej z przedmiotów
+- Zarządzanie użytkowników
+- Logowanie i autoryzacja użytkowników
+- Zarządzenie różnymi klasami, przedmiotami, i zajęciami
+- Tworzenie egzaminów i informowanie o nadchodących egzaminach
+- Obliczanie średniej z przedmiotów
 
 ## Użytkownicy
 
 System obsługuje trzy typy użytkowników:
-    - studentów
-    - nauczycieli
-    - administratorów
+- studentów
+- nauczycieli
+- administratorów
 
 Użytkownicy mają własne widoki oraz odrębne pozwolenia odnośnie systemu.
 
@@ -34,26 +34,26 @@ Student ma jedynie wgląd do danych.
     Może on zobaczyć jakie są przyszłe egzaminy, jaką ma średnią, oraz na jakie przedmioty jest zapisany.
 
 Przykładowe dane logowania:
-    Student:
-        Email: `adrian1@school.com`
-    Nauczyciel:
-        Email: `sandra6@school.com`
-    Administrator:
-        Email: `marcin8@school.com`
-    
-    Wszystkie hasła to 1234
+- Student:
+    Email: `adrian1@school.com`
+- Nauczyciel:
+    Email: `sandra6@school.com`
+- Administrator:
+    Email: `marcin8@school.com`
 
-    Dane logowania innych użytkowników można znaleźć w pliku seeds.rb
+Wszystkie hasła to `1234`
+
+Dane logowania innych użytkowników można znaleźć w pliku seeds.rb
 
 ## Tabele
 
-    Users - Użytkownicy
-    User_types - Typy użytkowników
-    Grades - Klasy (grupy użytkowniów)
-    Subjects - Lista przedmioty
-    Courses - Zajęcia (Klasa + przedmiot + nauczyciel)
-    Marks - Oceny
-    Exams - Egzaminy
+- Users - Użytkownicy
+- User_types - Typy użytkowników
+- Grades - Klasy (grupy użytkowniów)
+- Subjects - Lista przedmioty
+- Courses - Zajęcia (Klasa + przedmiot + nauczyciel)
+- Marks - Oceny
+- Exams - Egzaminy
 
 ## Ładowanie bazy danych
 
