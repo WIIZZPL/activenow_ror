@@ -4,7 +4,8 @@ Niniejszy projekt jest przykładowym system zarządzania szkołą.
 
 ## Uruchomienie
 
-    
+    Serwer można łatwo uruchomić i przygotować poprzez wkoananie polecenia
+    `bin/setup`
 
 ## Możliwości systemu
 
